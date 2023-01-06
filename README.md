@@ -248,6 +248,7 @@ display:
     spi_id: lcd
     cs_pin: 15
     dc_pin: 2
+    led_pin: 21
     lambda: |-
       int hs = it.get_width() / 2; // Horizontal Spacing = text data horizontal center point
       int hq = it.get_width() / 4; // text data horizontal center for two vertical lines
