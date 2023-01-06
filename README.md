@@ -53,7 +53,7 @@ touchscreen:
 ```
 
 ### I2C
-The default gpio pins for I2C on an ESP32 are GPIO21 and GPIO22. Both of them are exposed in the extended IO connector (P3), but GPIO21 is also used as a led pin, so it looks to be useless. GPIO35 which is also exposed in the extended IO connector can only be used for input, so also useless for I2C. Luckily there is another connector with GPIO27, which makes it possible to setup an I2C bus.
+The default gpio pins for I2C on an ESP32 are GPIO21 and GPIO22. Both of them are exposed in the extended IO connector (P3), but apparently GPIO21 is also used as a led pin in the lcd SPI bus, so it looks as if this gpio pin is somehow useless on the extended IO connector. GPIO35 which is also exposed in the extended IO connector can only be used for input, so also useless for I2C. Luckily there is another connector with GPIO27, which makes it possible to setup an I2C bus.
 ``` yaml
 i2c:
   sda: GPIO27
