@@ -10,6 +10,7 @@ Only a few gpio pins are exposed and usable, but by using I²C you could use a M
 ## Software
 ### SPI
 Two separate SPI busses are being used for the display and the touchscreen.
+``` yaml
 spi:
   - id: my_display
     clk_pin: GPIO14
@@ -19,3 +20,4 @@ spi:
     clk_pin: GPIO25
     mosi_pin: GPIO32
     miso_pin: GPIO39
+```
