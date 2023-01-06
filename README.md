@@ -302,3 +302,5 @@ switch:
 ```
 #### Screenshot
 <img src="/../main/Pictures/esp32_2432s028_demo.jpg" width="40%" alt= "Schematic" height="40%">
+#### Home Assistant integration
+<img src="/../main/Pictures/esp32_2432s028_home_assistant.jpg" width="40%" alt= "Schematic" height="40%">
