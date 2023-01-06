@@ -167,7 +167,7 @@ binary_sensor:
     id: system_status
 
   - platform: touchscreen
-    name: Test
+    name: Power
     x_min: 30
     x_max: 90
     y_min: 20
