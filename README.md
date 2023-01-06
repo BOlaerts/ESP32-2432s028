@@ -22,7 +22,7 @@ spi:
     miso_pin: GPIO39
 ```
 #### Display
-The esp32-2432s028 has an ili9341 display that can be used via ther LCD SPI bus:
+The esp32-2432s028 has an ili9341 display that can be used via the lcd SPI bus:
 ``` yaml
 display:
   - platform: ili9341
@@ -34,8 +34,7 @@ display:
       ...
 ```
 #### Touchscreen
-To be able to use the touchscreen interface, a touchscreen 
-The esp32-2432s028 has an ili9341 display that can be used via ther LCD SPI bus:
+To add touch functionalities, a touchscreen component should be added via the touch SPI bus:
 ``` yaml
 touchscreen:
   platform: xpt2046
