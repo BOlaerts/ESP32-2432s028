@@ -30,6 +30,7 @@ display:
     spi_id: lcd
     cs_pin: 15
     dc_pin: 2
+    led_pin: 21
     lambda: |-
       ...
 ```
