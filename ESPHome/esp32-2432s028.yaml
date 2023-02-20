@@ -1,0 +1,234 @@
+substitutions:
+  devicename: "esp32-2432s028"
+  ssid: Esp32-2432S028 Fallback Hotspot
+  static_ip: 192.168.0.44
+  gateway: 192.168.0.1
+  subnet: 255.255.255.0
+
+packages:
+  wifi: !include common/wifi.yaml
+  
+esphome:
+  name: $devicename
+  build_path: ./build/$devicename
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+
+api:
+
+ota:
+
+captive_portal:
+
+spi:
+  - id: lcd
+    clk_pin: GPIO14
+    mosi_pin: GPIO13
+    miso_pin: GPIO12
+  - id: touch
+    clk_pin: GPIO25
+    mosi_pin: GPIO32
+    miso_pin: GPIO39
+
+i2c:
+  sda: GPIO27
+  scl: GPIO22
+  scan: true
+  id: bus_a
+
+color:
+  - id: my_red
+    red: 100%
+    green: 0%
+    blue: 0%
+  - id: my_orange
+    red: 100%
+    green: 50%
+    blue: 0%
+  - id: my_yellow
+    red: 100%
+    green: 100%
+    blue: 0%
+  - id: my_green
+    red: 0%
+    green: 100%
+    blue: 0%
+  - id: my_blue
+    red: 0%
+    green: 0%
+    blue: 100%
+  - id: my_teal
+    red: 0%
+    green: 100%
+    blue: 100%
+  - id: my_gray
+    red: 70%
+    green: 70%
+    blue: 70%
+  - id: my_white
+    red: 100%
+    green: 100%
+    blue: 100%
+  - id: my_black
+    red: 0%
+    green: 0%
+    blue: 0%
+
+font:
+  - file: "Helvetica.ttf"
+    id: helvetica_48
+    size: 48
+  - file: "Helvetica.ttf"
+    id: helvetica_36
+    size: 36
+  - file: "Helvetica.ttf"
+    id: helvetica_24
+    size: 24
+  - file: "Helvetica.ttf"
+    id: helvetica_12
+    size: 12
+
+image:
+  - file: "power-off-button.png"
+    id: on_off_button
+  - file: "radio-station.png"
+    id: radio
+
+binary_sensor:
+  - platform: status
+    name: "Node Status"
+    id: system_status
+
+  - platform: touchscreen
+    name: Test
+    x_min: 30
+    x_max: 90
+    y_min: 20
+    y_max: 80
+
+  - platform: touchscreen
+    name: Music
+    x_min: 150
+    x_max: 210
+    y_min: 20
+    y_max: 80
+
+  - platform: homeassistant
+    name: "Sfeerlamp bureau"
+    entity_id: light.sfeerlamp_bureau
+    id: ha_sfeerlamp_bureau
+
+  - platform: pn532
+    uid: 13-E3-1A-16
+    name: "PN532 NFC Tag"
+
+time:
+  - platform: homeassistant
+    id: esptime
+
+text_sensor:
+  - platform: template
+    # name: Uptime Human Readable
+    id: uptime_human
+    icon: mdi:clock-start
+    internal: True
+
+  - platform: wifi_info
+    ip_address:
+      # name: ESP IP Address
+      id: ip_address
+
+  - platform: template
+    name: "RFID Tag"
+    id: rfid_tag  
+
+sensor:
+  - platform: bmp280
+    temperature:
+      name: "Temperatuur"
+      unit_of_measurement: °C
+      accuracy_decimals: 1
+      id: "bme_temperature"
+    pressure:
+      name: "Luchtdruk"
+      unit_of_measurement: hPa
+      accuracy_decimals: 0
+      id: "bme_humidity"
+    address: 0x76
+    update_interval: 30s        
+
+display:
+  - platform: ili9341
+    model: TFT 2.4
+    spi_id: lcd
+    cs_pin: 15
+    dc_pin: 2
+    led_pin: 21
+    lambda: |-
+      int hs = it.get_width() / 2; // Horizontal Spacing = text data horizontal center point
+      int hq = it.get_width() / 4; // text data horizontal center for two vertical lines
+      int vs = it.get_height() / 8; // Vertical Center = text data vertical center point = how many lines
+      int line_gap = 21; // distance of line from center of data text
+      it.rectangle(0,  0, it.get_width(), it.get_height(), id(my_blue));
+      it.rectangle(0, 20, it.get_width(), it.get_height(), id(my_blue));
+      
+      it.strftime(5, 5, id(helvetica_12), id(my_white), TextAlign::TOP_LEFT, "%H:%M:%S", id(esptime).now());
+      it.print(hs, 5, id(helvetica_12), id(my_blue), TextAlign::TOP_CENTER, "${devicename}"); //print title  
+      
+      if (id(system_status).state) {
+        it.print(it.get_width()-5, 5, id(helvetica_12), id(my_green), TextAlign::TOP_RIGHT, "Online");
+      }
+      else {
+        it.print(it.get_width()-5, 5, id(helvetica_12), id(my_red), TextAlign::TOP_RIGHT, "Offline");
+      }
+      it.line(0, it.get_height()-20, it.get_width(), it.get_height()-20, id(my_blue)); // line across bottom above footer text
+      it.printf(it.get_width()-5, it.get_height()-3, id(helvetica_12), id(my_gray), TextAlign::BOTTOM_RIGHT, "%s", id(ip_address).state.c_str());
+
+      if (id(ha_sfeerlamp_bureau).state) {
+        it.image(hq - 25, 50, id(on_off_button), id(my_green), id(my_black));
+        }
+      else {
+        it.image(hq - 25, 50, id(on_off_button), id(my_red), id(my_black));
+        }
+
+      it.image(3*hq - 25, 50, id(radio));
+
+      it.line(0, vs * 4, it.get_width(), vs * 4, id(my_blue));
+      it.print(hs, vs * 4 + line_gap, id(helvetica_24), id(my_white), TextAlign::CENTER, "BME280 sensor");
+      it.line(0, vs * 5, it.get_width(), vs * 5, id(my_blue));
+      it.print(hq, vs * 6, id(helvetica_12), id(my_white), TextAlign::CENTER, "Temperature:");
+      it.printf(3*hq, vs * 6, id(helvetica_12), id(my_white), TextAlign::CENTER, "%.1f°C", id(bme_temperature).state);
+      it.print(hq, vs * 7, id(helvetica_12), id(my_white), TextAlign::CENTER, "Pressure:");
+      it.printf(3*hq, vs * 7, id(helvetica_12), id(my_white), TextAlign::CENTER, "%.0fhPa", id(bme_humidity).state);
+
+touchscreen:
+  platform: xpt2046
+  spi_id: touch
+  cs_pin: 33
+  interrupt_pin: 36
+  update_interval: 50ms
+  report_interval: 1s
+  threshold: 400
+  calibration_x_min: 3860
+  calibration_x_max: 280
+  calibration_y_min: 340
+  calibration_y_max: 3860
+  swap_x_y: false
+
+# Exposed switches.
+switch:
+  - platform: restart
+    name: ESP32-2432S028 Restart
+
+pn532_i2c:
+  update_interval: 1s
+  on_tag:
+    then:
+    - text_sensor.template.publish:
+        id: rfid_tag
+        state: !lambda 'return x;'
