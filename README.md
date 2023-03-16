@@ -25,12 +25,11 @@ spi:
 The esp32-2432s028 has an ili9341 display that can be used via the lcd SPI bus:
 ``` yaml
 display:
-  - platform: ili9341
+  - platform: ili9xxx
     model: TFT 2.4
     spi_id: lcd
     cs_pin: 15
     dc_pin: 2
-    led_pin: 21
     lambda: |-
       ...
 ```
