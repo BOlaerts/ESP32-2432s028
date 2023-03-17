@@ -257,12 +257,11 @@ sensor:
     update_interval: 30s        
 
 display:
-  - platform: ili9341
-    model: TFT 2.4
+  - platform: ili9xxx
+    model: ILI9341
     spi_id: lcd
     cs_pin: 15
     dc_pin: 2
-    led_pin: 21
     lambda: |-
       int hs = it.get_width() / 2; // Horizontal Spacing = text data horizontal center point
       int hq = it.get_width() / 4; // text data horizontal center for two vertical lines
@@ -295,6 +294,18 @@ display:
       it.print(hq, vs * 6, id(helvetica_12), id(my_white), TextAlign::CENTER, "Pressure:");
       it.printf(3*hq, vs * 6, id(helvetica_12), id(my_white), TextAlign::CENTER, "%.0fhPa", id(bme_humidity).state);
 
+output:
+  - platform: ledc
+    pin: 21
+    id: former_led_pin
+
+# Define a monochromatic, dimmable light for the backlight
+light:
+  - platform: monochromatic
+    output: former_led_pin
+    name: "Display Backlight"
+    id: back_light
+    restore_mode: ALWAYS_ON
 
 touchscreen:
   platform: xpt2046
