@@ -32,6 +32,20 @@ display:
     dc_pin: 2
     lambda: |-
       ...
+
+# Former led pin in the display config
+output:
+  - platform: ledc
+    pin: 21
+    id: former_led_pin
+
+# Define a monochromatic, dimmable light for the backlight
+light:
+  - platform: monochromatic
+    output: former_led_pin
+    name: "Display Backlight"
+    id: back_light
+    restore_mode: ALWAYS_ON
 ```
 #### Touchscreen
 To add touch functionalities, a touchscreen component should be added via the touch SPI bus:
