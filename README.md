@@ -75,6 +75,41 @@ i2c:
   scan: true
   id: bus_a
 ```
+### Force LED on back of module to stay off
+``` yaml
+# Define pins for backlight display and back LED1
+output:
+  - platform: ledc
+    pin: GPIO21
+    id: former_led_pin
+  - platform: ledc
+    id: output_red
+    pin: GPIO4
+    inverted: true
+  - platform: ledc
+    id: output_green
+    pin: GPIO16
+    inverted: true
+  - platform: ledc
+    id: output_blue
+    pin: GPIO17
+    inverted: true
+
+# Define a monochromatic, dimmable light for the backlight
+light:
+  - platform: monochromatic
+    output: former_led_pin
+    name: "Display Backlight"
+    id: back_light
+    restore_mode: ALWAYS_ON
+  - platform: rgb
+    name: LED
+    red: output_red
+    id: led
+    green: output_green
+    blue: output_blue
+    restore_mode: ALWAYS_OFF
+```
 ### Demo
 #### YAML
 ``` yaml
@@ -294,10 +329,23 @@ display:
       it.print(hq, vs * 6, id(helvetica_12), id(my_white), TextAlign::CENTER, "Pressure:");
       it.printf(3*hq, vs * 6, id(helvetica_12), id(my_white), TextAlign::CENTER, "%.0fhPa", id(bme_humidity).state);
 
+# Define pins for backlight display and back LED1
 output:
   - platform: ledc
-    pin: 21
+    pin: GPIO21
     id: former_led_pin
+  - platform: ledc
+    id: output_red
+    pin: GPIO4
+    inverted: true
+  - platform: ledc
+    id: output_green
+    pin: GPIO16
+    inverted: true
+  - platform: ledc
+    id: output_blue
+    pin: GPIO17
+    inverted: true
 
 # Define a monochromatic, dimmable light for the backlight
 light:
@@ -306,6 +354,13 @@ light:
     name: "Display Backlight"
     id: back_light
     restore_mode: ALWAYS_ON
+  - platform: rgb
+    name: LED
+    red: output_red
+    id: led
+    green: output_green
+    blue: output_blue
+    restore_mode: ALWAYS_OFF
 
 touchscreen:
   platform: xpt2046
