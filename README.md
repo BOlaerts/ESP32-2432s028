@@ -331,3 +331,7 @@ switch:
 
 #### Home Assistant integration
 <img src="/../main/Pictures/esp32_2432s028_home_assistant.jpg" width="80%" alt= "Schematic" height="80%">
+
+### Enclosure options
+- https://www.thingiverse.com/thing:5680106
+- https://www.thingiverse.com/thing:5905855
