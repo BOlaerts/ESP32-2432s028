@@ -394,7 +394,7 @@ switch:
 - https://www.thingiverse.com/thing:5905855
  
 ### Update 19.07.2023: attempt to make a Home Assistant remote control
-Using one of the above enclosure options, a 600 MAh 3.7V battery and a MT3608 steup-up convertor, I tried to make a Home Assistant remote control.
+Using one of the above enclosure options, a 600 MAh 3.7V battery and a MT3608 step-up convertor, I tried to make a Home Assistant remote control.
 Conclusion: it works, but unfortunately I didn't manage to keep it working for an acceptable period of time, even with deep sleep implemented.
 
 <img src="/../main/Pictures/esp32_2432s028_remote.jpg" width="40%" alt= "Remote control" height="40%">
