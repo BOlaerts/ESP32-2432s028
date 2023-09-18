@@ -4,6 +4,8 @@ This repository contains some experimental setup for using the esp32-2432s028 de
 Only a few gpio pins are exposed and usable, but by using I²C you could use a MCP23017 module to add additional ports.
 
 ## Hardware
+### Development board
+https://www.aliexpress.com/item/1005004502250619.html?spm=a2g0o.order_list.order_list_main.5.13c779d2dc6OKo
 ### Wiring esp32-2432s028 + BME280 sensor
 All credits for extended pinout explanation go to macsbug, see more on: https://macsbug.wordpress.com/2022/08/17/esp32-2432s028/
 
