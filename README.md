@@ -9,6 +9,8 @@ All credits for extended pinout explanation go to macsbug, see more on: https://
 
 <img src="/../main/Pictures/esp32_2432s028_i2c.jpg" width="40%" alt= "Schematic" height="40%">
 
+Flashing instructions: keep the boot button pressed when you plug in the USB cable/flasher, this will allow to flash the firmware.
+
 ## Software
 ### SPI
 Two separate SPI busses are being used for the display and the touchscreen.
