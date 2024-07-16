@@ -374,10 +374,11 @@ touchscreen:
   update_interval: 50ms
   report_interval: 1s
   threshold: 400
-  calibration_x_min: 3860
-  calibration_x_max: 280
-  calibration_y_min: 340
-  calibration_y_max: 3860
+  calibration:
+    x_min: 3860
+    x_max: 280
+    y_min: 340
+    y_max: 3860
   swap_x_y: false
 
 # Exposed switches.
