@@ -61,10 +61,11 @@ touchscreen:
   interrupt_pin: 36
   update_interval: 50ms
   threshold: 400
-  calibration_x_min: 3860
-  calibration_x_max: 280
-  calibration_y_min: 340
-  calibration_y_max: 3860
+  calibration:
+    x_min: 3860
+    x_max: 280
+    y_min: 340
+    y_max: 3860
 
 ```
 
