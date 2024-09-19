@@ -281,7 +281,7 @@ sensor:
     id: wifi_signal_sensor
     update_interval: 5s
 
-  - platform: bmp280
+  - platform: bmp280_i2c
     temperature:
       name: "Temperatuur"
       unit_of_measurement: °C
@@ -301,6 +301,7 @@ display:
     spi_id: lcd
     cs_pin: 15
     dc_pin: 2
+    invert_colors: false
     lambda: |-
       int hs = it.get_width() / 2; // Horizontal Spacing = text data horizontal center point
       int hq = it.get_width() / 4; // text data horizontal center for two vertical lines
