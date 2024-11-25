@@ -376,8 +376,8 @@ touchscreen:
   report_interval: 1s
   threshold: 400
   calibration:
-    x_min: 3860
-    x_max: 280
+    x_min: 280
+    x_max: 3860
     y_min: 340
     y_max: 3860
   swap_x_y: false
