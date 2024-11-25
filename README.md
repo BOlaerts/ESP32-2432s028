@@ -66,6 +66,10 @@ touchscreen:
     x_max: 3860
     y_min: 340
     y_max: 3860
+  transform:
+    mirror_x: true
+    mirror_y: false
+    swap_xy: false
 
 ```
 
@@ -380,7 +384,10 @@ touchscreen:
     x_max: 3860
     y_min: 340
     y_max: 3860
-  swap_x_y: false
+  transform:
+    mirror_x: true
+    mirror_y: false
+    swap_xy: false
 
 # Exposed switches.
 switch:
