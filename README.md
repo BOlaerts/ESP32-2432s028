@@ -12,7 +12,7 @@ All credits for extended pinout explanation go to macsbug, see more on: https://
 Flashing instructions: keep the boot button pressed when you plug in the USB cable/flasher, this will allow to flash the firmware.
 
 Remark: some boards have IO22 next to IO27 on CN1, so a single plug and cable can be used.
-Credits to https://github.com/BOlaerts/ESP32-2432s028/issues?q=is%3Aissue%20state%3Aclosed%20author%3Adbuggz
+[Credits to Dave W](https://github.com/dbuggz)
 
 ## Software
 ### SPI
