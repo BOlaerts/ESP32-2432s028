@@ -218,8 +218,10 @@ font:
 image:
   - file: "power-off-button.png"
     id: on_off_button
+    type: binary
   - file: "radio-station.png"
     id: radio
+    type: binary
 
 binary_sensor:
   - platform: status
